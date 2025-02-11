@@ -1,0 +1,550 @@
+{
+  "address": "Auctn5jG7vS8SAH1LWvyKF1vWJbMFzXeMJjBQGdiWUZu",
+  "metadata": {
+    "name": "aipool_auction",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "close_escrow",
+      "discriminator": [
+        139,
+        171,
+        94,
+        146,
+        191,
+        91,
+        144,
+        50
+      ],
+      "accounts": [
+        {
+          "name": "auction"
+        },
+        {
+          "name": "bid_escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  105,
+                  100
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "auction"
+              },
+              {
+                "kind": "account",
+                "path": "bidder"
+              }
+            ]
+          }
+        },
+        {
+          "name": "bidder",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_index",
+      "discriminator": [
+        204,
+        67,
+        3,
+        74,
+        139,
+        139,
+        233,
+        10
+      ],
+      "accounts": [
+        {
+          "name": "auctions_indexer",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  117,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  115,
+                  95,
+                  105,
+                  110,
+                  100,
+                  101,
+                  120,
+                  101,
+                  114
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "place_bid",
+      "discriminator": [
+        238,
+        77,
+        148,
+        91,
+        200,
+        151,
+        92,
+        146
+      ],
+      "accounts": [
+        {
+          "name": "auction",
+          "writable": true
+        },
+        {
+          "name": "bid_escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  105,
+                  100
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "auction"
+              },
+              {
+                "kind": "account",
+                "path": "bidder"
+              }
+            ]
+          }
+        },
+        {
+          "name": "bidder",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "bid",
+          "type": "u64"
+        },
+        {
+          "name": "twitter_handle",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "start_auction",
+      "discriminator": [
+        255,
+        2,
+        149,
+        136,
+        148,
+        125,
+        65,
+        195
+      ],
+      "accounts": [
+        {
+          "name": "auctions_indexer",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  117,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  115,
+                  95,
+                  105,
+                  110,
+                  100,
+                  101,
+                  120,
+                  101,
+                  114
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "auction",
+          "writable": true
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "previous_auction",
+          "optional": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  117,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "auctions_indexer.auctions_counter",
+                "account": "AuctionsIndexer"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "withdraw",
+      "discriminator": [
+        183,
+        18,
+        70,
+        156,
+        148,
+        109,
+        161,
+        34
+      ],
+      "accounts": [
+        {
+          "name": "auction",
+          "writable": true
+        },
+        {
+          "name": "bid_escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  105,
+                  100
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "auction"
+              },
+              {
+                "kind": "account",
+                "path": "auction.highest_bidder",
+                "account": "Auction"
+              }
+            ]
+          }
+        },
+        {
+          "name": "recipient",
+          "writable": true,
+          "address": "EvkcRXSPZactUN5dEHpWXtxnQrZR1NbtFrVGufF3Svr1"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Auction",
+      "discriminator": [
+        218,
+        94,
+        247,
+        242,
+        126,
+        233,
+        131,
+        81
+      ]
+    },
+    {
+      "name": "AuctionsIndexer",
+      "discriminator": [
+        191,
+        147,
+        63,
+        5,
+        214,
+        139,
+        10,
+        176
+      ]
+    },
+    {
+      "name": "BidEscrow",
+      "discriminator": [
+        146,
+        219,
+        14,
+        4,
+        42,
+        183,
+        243,
+        215
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "BidTooLow",
+      "msg": "Bid is too low"
+    },
+    {
+      "code": 6001,
+      "name": "Unauthorized",
+      "msg": "Unauthorized"
+    },
+    {
+      "code": 6002,
+      "name": "AuctionExpired",
+      "msg": "Auction is expired"
+    },
+    {
+      "code": 6003,
+      "name": "AuctionNotExpired",
+      "msg": "Auction not expired"
+    },
+    {
+      "code": 6004,
+      "name": "AuctionWithdrawnAlready",
+      "msg": "Auction withdraw already exectued"
+    },
+    {
+      "code": 6005,
+      "name": "OngoingAuction",
+      "msg": "Last auction has not been completed yet"
+    },
+    {
+      "code": 6006,
+      "name": "AuctionNotActive",
+      "msg": "Auction is not active"
+    },
+    {
+      "code": 6007,
+      "name": "AuctionNotEnded",
+      "msg": "Auction has not ended"
+    },
+    {
+      "code": 6008,
+      "name": "UnauthorizedRecipient",
+      "msg": "Unauthorized recipient"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidSize",
+      "msg": "Invalid size"
+    },
+    {
+      "code": 6010,
+      "name": "InvalidBidder",
+      "msg": "Invalid best bidder"
+    },
+    {
+      "code": 6011,
+      "name": "InvalidTwitter",
+      "msg": "Invalid twitter"
+    },
+    {
+      "code": 6012,
+      "name": "InsufficientFunds",
+      "msg": "Insufficient funds"
+    },
+    {
+      "code": 6013,
+      "name": "PreviousBidder",
+      "msg": "Previous bidder different"
+    },
+    {
+      "code": 6014,
+      "name": "MissingAuction",
+      "msg": "Missing auction"
+    }
+  ],
+  "types": [
+    {
+      "name": "Auction",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "indexer_counter",
+            "type": "u64"
+          },
+          {
+            "name": "twitter_handle",
+            "type": {
+              "array": [
+                "u8",
+                15
+              ]
+            }
+          },
+          {
+            "name": "highest_bid",
+            "type": "u64"
+          },
+          {
+            "name": "highest_bidder",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "withdrawn",
+            "type": "bool"
+          },
+          {
+            "name": "start_time",
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "type": "i64"
+          },
+          {
+            "name": "padding",
+            "type": {
+              "array": [
+                "u8",
+                48
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "AuctionsIndexer",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "auctions_counter",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BidEscrow",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "bidder",
+            "type": "pubkey"
+          },
+          {
+            "name": "indexer_counter",
+            "type": "u64"
+          },
+          {
+            "name": "padding",
+            "type": {
+              "array": [
+                "u8",
+                48
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
